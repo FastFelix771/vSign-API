@@ -26,9 +26,16 @@ public enum Version {
 	v1_0 ( 0, null, null),
   UNKNOWN(-1, null, null);
 	
-	@Getter
-	private static final Version current = fromString(Bukkit.getServer().getClass().getPackage().getName().substring(23) + ".");
+	private static Version current = null;
 
+	public static Version getCurrent() {
+		if(current == null) {
+			current = fromString(Bukkit.getServer().getClass().getPackage().getName().substring(23) + ".");
+		}
+		
+		return current;
+	}
+	
 	@Getter(AccessLevel.PRIVATE) 
 	private final int integer;
 
