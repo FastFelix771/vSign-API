@@ -30,7 +30,7 @@ public enum Version {
 
 	public static Version getCurrent() {
 		if(current == null) {
-			current = fromString(Bukkit.getServer().getClass().getPackage().getName().substring(23) + ".");
+			current = fromString(Bukkit.getServer().getClass().getPackage().getName().substring(23));
 		}
 		
 		return current;
@@ -76,11 +76,19 @@ public enum Version {
 	}
 
 	public static Version fromString(String input) {
-		String tmp = input.replaceAll("[^0-9+_0-9+]", "").toLowerCase();
+		String tmp = input.replaceAll("[^0-9_0-9]+", "");
 
-		for(Version v : values()) {
-			if(tmp.startsWith(v.toString().toLowerCase())) return v;
-		}
+		if(tmp.startsWith("1_10")) return Version.v1_10;
+		if(tmp.startsWith("1_9")) return Version.v1_9;
+		if(tmp.startsWith("1_8")) return Version.v1_8;
+		if(tmp.startsWith("1_7")) return Version.v1_7;
+		if(tmp.startsWith("1_6")) return Version.v1_6;
+		if(tmp.startsWith("1_5")) return Version.v1_5;
+		if(tmp.startsWith("1_4")) return Version.v1_4;
+		if(tmp.startsWith("1_3")) return Version.v1_3;
+		if(tmp.startsWith("1_2")) return Version.v1_2;
+		if(tmp.startsWith("1_1")) return Version.v1_1;
+		if(tmp.startsWith("1_0")) return Version.v1_0;
 
 		return Version.UNKNOWN;
 	}
