@@ -12,5 +12,6 @@ public abstract interface PacketHandler {
     
     public void sendPacket(Player player, PacketContainer packet);
     public void addPacketListener(Plugin plugin, Player player, PacketType type, ReturningInvoker<PacketContainer, Boolean> invoker, boolean dropPacketOnError);
+    public void addPacketListener(Plugin plugin, Player player, int legacyID, ReturningInvoker<PacketContainer, Boolean> invoker, boolean dropPacketOnError);
     
 }

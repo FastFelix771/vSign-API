@@ -1,4 +1,6 @@
-package de.unitygaming.bukkit.vsign.packets.v1_6;
+package de.unitygaming.bukkit.vsign.packets.v1_5;
+
+import java.util.HashMap;
 
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -12,7 +14,9 @@ import de.unitygaming.bukkit.vsign.invoker.Invoker;
 import de.unitygaming.bukkit.vsign.invoker.ReturningInvoker;
 import lombok.SneakyThrows;
 
-public class ProtocolLibvSign extends de.unitygaming.bukkit.vsign.packets.v1_5.ProtocolLibvSign implements VirtualSign {
+public class ProtocolLibvSign implements VirtualSign {
+
+	protected static final HashMap<String, Invoker<String[]>> pending = new HashMap<String, Invoker<String[]>>();
 
 	@Override @SneakyThrows
 	public void show(Player player, Invoker<String[]> callback) {
@@ -20,17 +24,23 @@ public class ProtocolLibvSign extends de.unitygaming.bukkit.vsign.packets.v1_5.P
 		pending.put(player.getName(), callback);
 
 		@SuppressWarnings("deprecation")
-		PacketContainer packet = ProtocolLibrary.getProtocolManager().createPacket(133);
+		PacketContainer packet = ProtocolLibrary.getProtocolManager().createPacket(130);
 
 		packet.getIntegers()
 		.write(0, 0)
 		.write(1, 0)
-		.write(2, 0)
-		.write(3, 0);
+		.write(2, 0);
+
+		// Test if strings needs to be set! - maybe we can leave em null
+		packet.getStrings()
+		.write(0, "")
+		.write(1, "")
+		.write(2, "")
+		.write(3, "");
 
 		Version.getCurrent().getPacketHandler().sendPacket(player, packet);
 	}
-	
+
 	@Override
 	public void setup(Plugin plugin, final Player player) {
 
@@ -39,11 +49,22 @@ public class ProtocolLibvSign extends de.unitygaming.bukkit.vsign.packets.v1_5.P
 			@Override
 			public Boolean invoke(PacketContainer packet) {
 				if(!pending.containsKey(player.getName())) return false;
-				pending.remove(player.getName()).invoke(packet.getStringArrays().read(0));
+				
+				String[] strings = new String[4];
+				for(int i = 0; i < 3; i++) {
+					strings[i] = packet.getStrings().read(i);
+				}
+				
+				pending.remove(player.getName()).invoke(strings);
 				return true;
 			}
 		}, true);
 
 	}
 
+	@Override
+	public void unsetup(Player player) {
+		pending.remove(player.getName());
+	}
+	
 }
