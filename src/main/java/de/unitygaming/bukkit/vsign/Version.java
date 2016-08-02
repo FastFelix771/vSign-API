@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.bukkit.Bukkit;
+import com.comphenix.protocol.ProtocolLibrary;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -27,7 +27,7 @@ public enum Version {
   UNKNOWN(-1, null, null);
 	
 	@Getter
-	private static final Version current = Version.fromString(Bukkit.getServer().getClass().getPackage().getName().substring(23) + ".");
+	private static Version current = fromString(ProtocolLibrary.getProtocolManager().getMinecraftVersion().getVersion());
 	
 	@Getter(AccessLevel.PRIVATE) 
 	private final int integer;
@@ -69,11 +69,17 @@ public enum Version {
 	}
 	
 	public static Version fromString(String input) {
-		 String temp = input.replaceAll("[^0-9+_0-9+]", "");
-
-		for(Version version : values()) {
-			if(temp.startsWith(version.toString().replaceAll("[^0-9+_0-9+]", ""))) return version;
-		}
+		if(input.startsWith("1.10")) return Version.v1_10;
+		if(input.startsWith("1.9")) return Version.v1_9;
+		if(input.startsWith("1.8")) return Version.v1_8;
+		if(input.startsWith("1.7")) return Version.v1_7;
+		if(input.startsWith("1.6")) return Version.v1_6;
+		if(input.startsWith("1.5")) return Version.v1_5;
+		if(input.startsWith("1.4")) return Version.v1_4;
+		if(input.startsWith("1.3")) return Version.v1_3;
+		if(input.startsWith("1.2")) return Version.v1_2;
+		if(input.startsWith("1.1")) return Version.v1_1;
+		if(input.startsWith("1.0")) return Version.v1_0;
 
 		return Version.UNKNOWN;
 	}

@@ -12,13 +12,12 @@ import de.unitygaming.bukkit.vsign.Version;
 import de.unitygaming.bukkit.vsign.VirtualSign;
 import de.unitygaming.bukkit.vsign.invoker.Invoker;
 import de.unitygaming.bukkit.vsign.invoker.ReturningInvoker;
-import lombok.SneakyThrows;
 
 public class ProtocolLibvSign implements VirtualSign {
 
 	protected static final HashMap<String, Invoker<String[]>> pending = new HashMap<String, Invoker<String[]>>();
 
-	@Override @SneakyThrows
+	@Override
 	public void show(Player player, Invoker<String[]> callback) {
 		if(pending.containsKey(player.getName())) return;
 		pending.put(player.getName(), callback);

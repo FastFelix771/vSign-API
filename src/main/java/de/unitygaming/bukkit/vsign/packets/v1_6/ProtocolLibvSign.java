@@ -10,11 +10,10 @@ import de.unitygaming.bukkit.vsign.Version;
 import de.unitygaming.bukkit.vsign.VirtualSign;
 import de.unitygaming.bukkit.vsign.invoker.Invoker;
 import de.unitygaming.bukkit.vsign.invoker.ReturningInvoker;
-import lombok.SneakyThrows;
 
 public class ProtocolLibvSign extends de.unitygaming.bukkit.vsign.packets.v1_5.ProtocolLibvSign implements VirtualSign {
 
-	@Override @SneakyThrows
+	@Override
 	public void show(Player player, Invoker<String[]> callback) {
 		if(pending.containsKey(player.getName())) return;
 		pending.put(player.getName(), callback);
