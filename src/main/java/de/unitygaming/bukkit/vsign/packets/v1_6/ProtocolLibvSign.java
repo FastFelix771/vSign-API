@@ -1,7 +1,6 @@
 package de.unitygaming.bukkit.vsign.packets.v1_6;
 
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
@@ -9,7 +8,6 @@ import com.comphenix.protocol.events.PacketContainer;
 import de.unitygaming.bukkit.vsign.Version;
 import de.unitygaming.bukkit.vsign.VirtualSign;
 import de.unitygaming.bukkit.vsign.invoker.Invoker;
-import de.unitygaming.bukkit.vsign.invoker.ReturningInvoker;
 
 public class ProtocolLibvSign extends de.unitygaming.bukkit.vsign.packets.v1_5.ProtocolLibvSign implements VirtualSign {
 
@@ -28,21 +26,6 @@ public class ProtocolLibvSign extends de.unitygaming.bukkit.vsign.packets.v1_5.P
 		.write(3, 0);
 
 		Version.getCurrent().getPacketHandler().sendPacket(player, packet);
-	}
-	
-	@Override
-	public void setup(Plugin plugin, final Player player) {
-
-		Version.getCurrent().getPacketHandler().addPacketListener(plugin, player, 130, new ReturningInvoker<PacketContainer, Boolean>() {
-
-			@Override
-			public Boolean invoke(PacketContainer packet) {
-				if(!pending.containsKey(player.getName())) return false;
-				pending.remove(player.getName()).invoke(packet.getStringArrays().read(0));
-				return true;
-			}
-		}, true);
-
 	}
 
 }

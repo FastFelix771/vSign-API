@@ -30,13 +30,6 @@ public class ProtocolLibvSign implements VirtualSign {
 		.write(1, 0)
 		.write(2, 0);
 
-		// Test if strings needs to be set! - maybe we can leave em null
-		packet.getStrings()
-		.write(0, "")
-		.write(1, "")
-		.write(2, "")
-		.write(3, "");
-
 		Version.getCurrent().getPacketHandler().sendPacket(player, packet);
 	}
 
@@ -48,13 +41,7 @@ public class ProtocolLibvSign implements VirtualSign {
 			@Override
 			public Boolean invoke(PacketContainer packet) {
 				if(!pending.containsKey(player.getName())) return false;
-				
-				String[] strings = new String[4];
-				for(int i = 0; i < 3; i++) {
-					strings[i] = packet.getStrings().read(i);
-				}
-				
-				pending.remove(player.getName()).invoke(strings);
+				pending.remove(player.getName()).invoke(packet.getStringArrays().read(0));
 				return true;
 			}
 		}, true);
