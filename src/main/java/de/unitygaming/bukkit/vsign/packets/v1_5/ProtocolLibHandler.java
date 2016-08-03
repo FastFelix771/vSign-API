@@ -46,7 +46,7 @@ public class ProtocolLibHandler implements PacketHandler {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void addPacketListener(Plugin plugin, final Player player, final int legacyID, final ReturningInvoker<PacketContainer, Boolean> invoker, final boolean dropPacketOnError) {
-		ProtocolLibrary.getProtocolManager().addPacketListener(new PacketAdapter(plugin, ConnectionSide.BOTH, GamePhase.PLAYING, legacyID) {
+		ProtocolLibrary.getProtocolManager().addPacketListener(new PacketAdapter(plugin, ConnectionSide.CLIENT_SIDE, GamePhase.PLAYING, legacyID) {
 
 			@Override
 			public void onPacketReceiving(PacketEvent e) {
