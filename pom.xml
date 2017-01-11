@@ -6,10 +6,25 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>vSign-API</name>
 	<description>Allows the developer to send virtual signs to a player and process their text input!</description>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>InternalSnapshots</id>
+			<name>Internal Snapshots</name>
+			<url>https://repo.unitygaming.de/repository/internal/internal-snapshots/</url>
+		</snapshotRepository>
+		<repository>
+			<id>InternalReleases</id>
+			<name>Internal Releases</name>
+			<url>https://repo.unitygaming.de/repository/internal/internal-releases/</url>
+		</repository>
+	</distributionManagement>
+
 	<build>
 		<plugins>
 			<plugin>
