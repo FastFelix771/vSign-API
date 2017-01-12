@@ -1,6 +1,6 @@
 variables:
   MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
-  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=false -DdeployAtEnd=true"
+  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
 
 cache:
   paths:
@@ -8,4 +8,8 @@ cache:
   
 maven-build:
   script:
-    - mvn clean integration-test
+    - 'mvn clean package -B'
+    
+maven-deploy:
+  script:
+    - 'mvn deploy:deploy-file -DpomFile=target/pom.xml -Dfile=target/vSign-API.jar -DrepositoryId=InternalSnapshots'
