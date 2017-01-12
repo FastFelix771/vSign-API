@@ -12,4 +12,4 @@ maven-build:
     
 maven-deploy:
   script:
-    - 'mvn deploy:deploy-file -DpomFile=target/pom.xml -Dfile=target/${project.artifactId}-${project.version}.jar -DrepositoryId=InternalSnapshots -B'
+    - 'mvn deploy:deploy-file -DpomFile=target/pom.xml -Dfile="target/${project.artifactId}-${project.version}-SNAPSHOT.jar" -DrepositoryId=InternalSnapshots -B'
