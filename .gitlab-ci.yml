@@ -1,6 +1,6 @@
 variables:
   MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
-  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
+  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=false -DdeployAtEnd=false"
 
 cache:
   paths:
@@ -12,4 +12,4 @@ maven-build:
     
 maven-deploy:
   script:
-    - 'mvn deploy:deploy-file -DpomFile=target/pom.xml -Dfile=target/vSign-API.jar -DrepositoryId=InternalSnapshots'
+    - 'mvn deploy:deploy-file -DpomFile=target/pom.xml -Dfile=target/${project.artifactId}-${project.version}.jar -DrepositoryId=InternalSnapshots -B'
