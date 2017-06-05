@@ -11,9 +11,11 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public enum Version {
+public enum Version { // REQUIRES testing!
 	
-	v1_10(110,new de.unitygaming.bukkit.vsign.packets.v1_10.ProtocolLibHandler(), new de.unitygaming.bukkit.vsign.packets.v1_10.ProtocolLibvSign()), 
+	v1_12(112, new de.unitygaming.bukkit.vsign.packets.v1_10.ProtocolLibHandler(), new de.unitygaming.bukkit.vsign.packets.v1_10.ProtocolLibvSign()),
+	v1_11(111, new de.unitygaming.bukkit.vsign.packets.v1_10.ProtocolLibHandler(), new de.unitygaming.bukkit.vsign.packets.v1_10.ProtocolLibvSign()),
+	v1_10(110, new de.unitygaming.bukkit.vsign.packets.v1_10.ProtocolLibHandler(), new de.unitygaming.bukkit.vsign.packets.v1_10.ProtocolLibvSign()), 
 	v1_9 (99, new de.unitygaming.bukkit.vsign.packets.v1_9 .ProtocolLibHandler(), new de.unitygaming.bukkit.vsign.packets.v1_9 .ProtocolLibvSign()), 
 	v1_8 (88, new de.unitygaming.bukkit.vsign.packets.v1_8 .ProtocolLibHandler(), new de.unitygaming.bukkit.vsign.packets.v1_8 .ProtocolLibvSign()), 
 	v1_7 (77, new de.unitygaming.bukkit.vsign.packets.v1_7 .ProtocolLibHandler(), new de.unitygaming.bukkit.vsign.packets.v1_7 .ProtocolLibvSign()), 
