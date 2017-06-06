@@ -14,17 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package de.unitygaming.bukkit.vsign;
+package de.unitygaming.bukkit.vsign.util;
 
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
+public abstract interface ReturningInvoker<A, B> {
 
-import de.unitygaming.bukkit.vsign.util.Invoker;
-
-public abstract interface VirtualSign {
-
-    public void show(Player player, Invoker<String[]> callback);
-    public void setup(Plugin plugin, Player player);
-    public void unsetup(Player player);
-    
+	public abstract B invoke(A object);
+	
 }
