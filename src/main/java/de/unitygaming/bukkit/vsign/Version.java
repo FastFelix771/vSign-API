@@ -87,6 +87,8 @@ public enum Version { // REQUIRES testing!
 	}
 	
 	public static Version fromString(String input) {
+		if(input.startsWith("1.12")) return Version.v1_12;
+		if(input.startsWith("1.11")) return Version.v1_11;
 		if(input.startsWith("1.10")) return Version.v1_10;
 		if(input.startsWith("1.9")) return Version.v1_9;
 		if(input.startsWith("1.8")) return Version.v1_8;
