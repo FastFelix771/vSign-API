@@ -60,12 +60,18 @@ public class ProtocolLibvSign implements VirtualSign {
 			@Override
 			public Boolean invoke(final PacketContainer packet) {
 				if(!pending.containsKey(player.getName())) return false;
-
+				
+				final String[] lines = packet.getStringArrays().read(0);
+				final Invoker<String[]> invoker = pending.remove(player.getName());
+				
+				if (invoker == null) return true;
+				if (lines == null) return true;
+				
 				Bukkit.getScheduler().runTask(plugin, new BukkitRunnable() {
 
 					@Override
 					public void run() {
-						pending.remove(player.getName()).invoke(packet.getStringArrays().read(0));
+						invoker.invoke(lines);
 					}
 
 				});

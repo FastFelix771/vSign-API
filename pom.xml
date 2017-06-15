@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.unitygaming.bukkit</groupId>
 	<artifactId>vSign-API</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<name>vSign-API</name>
 	<description>Allows the developer to send virtual signs to a player and process their text input!</description>
 
