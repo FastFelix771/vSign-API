@@ -16,8 +16,10 @@
  ******************************************************************************/
 package de.unitygaming.bukkit.vsign.packets.v1_7;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
@@ -44,16 +46,26 @@ public class ProtocolLibvSign extends de.unitygaming.bukkit.vsign.packets.v1_6.P
 
 		Version.getCurrent().getPacketHandler().sendPacket(player, packet);
 	}
-	
+
 	@Override
-	public void setup(Plugin plugin, final Player player) {
+	public void setup(final Plugin plugin, final Player player) {
 
 		Version.getCurrent().getPacketHandler().addPacketListener(plugin, player, PacketType.Play.Client.UPDATE_SIGN, new ReturningInvoker<PacketContainer, Boolean>() {
 
+			@SuppressWarnings("deprecation")
 			@Override
-			public Boolean invoke(PacketContainer packet) {
+			public Boolean invoke(final PacketContainer packet) {
 				if(!pending.containsKey(player.getName())) return false;
-				pending.remove(player.getName()).invoke(packet.getStringArrays().read(0));
+
+				Bukkit.getScheduler().runTask(plugin, new BukkitRunnable() {
+
+					@Override
+					public void run() {
+						pending.remove(player.getName()).invoke(packet.getStringArrays().read(0));
+					}
+
+				});
+
 				return true;
 			}
 		}, true);

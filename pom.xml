@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.unitygaming.bukkit</groupId>
 	<artifactId>vSign-API</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.3-SNAPSHOT</version>
 	<name>vSign-API</name>
 	<description>Allows the developer to send virtual signs to a player and process their text input!</description>
 
@@ -11,19 +11,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
-
-	<distributionManagement>
-		<snapshotRepository>
-			<id>InternalSnapshots</id>
-			<name>Internal Snapshots</name>
-			<url>https://repo.unitygaming.de/repository/internal/internal-snapshots/</url>
-		</snapshotRepository>
-		<repository>
-			<id>InternalReleases</id>
-			<name>Internal Releases</name>
-			<url>https://repo.unitygaming.de/repository/internal/internal-releases/</url>
-		</repository>
-	</distributionManagement>
 
 	<build>
 		<plugins>

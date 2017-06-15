@@ -18,8 +18,10 @@ package de.unitygaming.bukkit.vsign.packets.v1_5;
 
 import java.util.HashMap;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
@@ -50,14 +52,24 @@ public class ProtocolLibvSign implements VirtualSign {
 	}
 
 	@Override
-	public void setup(Plugin plugin, final Player player) {
+	public void setup(final Plugin plugin, final Player player) {
 
 		Version.getCurrent().getPacketHandler().addPacketListener(plugin, player, 130, new ReturningInvoker<PacketContainer, Boolean>() {
 
+			@SuppressWarnings("deprecation")
 			@Override
-			public Boolean invoke(PacketContainer packet) {
+			public Boolean invoke(final PacketContainer packet) {
 				if(!pending.containsKey(player.getName())) return false;
-				pending.remove(player.getName()).invoke(packet.getStringArrays().read(0));
+
+				Bukkit.getScheduler().runTask(plugin, new BukkitRunnable() {
+
+					@Override
+					public void run() {
+						pending.remove(player.getName()).invoke(packet.getStringArrays().read(0));
+					}
+
+				});
+
 				return true;
 			}
 		}, true);
@@ -68,5 +80,5 @@ public class ProtocolLibvSign implements VirtualSign {
 	public void unsetup(Player player) {
 		pending.remove(player.getName());
 	}
-	
+
 }

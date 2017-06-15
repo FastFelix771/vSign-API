@@ -27,16 +27,16 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public enum Version { // REQUIRES testing!
+public enum Version {
 	
-	v1_12(112, new de.unitygaming.bukkit.vsign.packets.v1_10.ProtocolLibHandler(), new de.unitygaming.bukkit.vsign.packets.v1_10.ProtocolLibvSign()),
-	v1_11(111, new de.unitygaming.bukkit.vsign.packets.v1_10.ProtocolLibHandler(), new de.unitygaming.bukkit.vsign.packets.v1_10.ProtocolLibvSign()),
+	v1_12(112, new de.unitygaming.bukkit.vsign.packets.v1_12.ProtocolLibHandler(), new de.unitygaming.bukkit.vsign.packets.v1_12.ProtocolLibvSign()),
+	v1_11(111, new de.unitygaming.bukkit.vsign.packets.v1_11.ProtocolLibHandler(), new de.unitygaming.bukkit.vsign.packets.v1_11.ProtocolLibvSign()),
 	v1_10(110, new de.unitygaming.bukkit.vsign.packets.v1_10.ProtocolLibHandler(), new de.unitygaming.bukkit.vsign.packets.v1_10.ProtocolLibvSign()), 
-	v1_9 (99, new de.unitygaming.bukkit.vsign.packets.v1_9 .ProtocolLibHandler(), new de.unitygaming.bukkit.vsign.packets.v1_9 .ProtocolLibvSign()), 
-	v1_8 (88, new de.unitygaming.bukkit.vsign.packets.v1_8 .ProtocolLibHandler(), new de.unitygaming.bukkit.vsign.packets.v1_8 .ProtocolLibvSign()), 
-	v1_7 (77, new de.unitygaming.bukkit.vsign.packets.v1_7 .ProtocolLibHandler(), new de.unitygaming.bukkit.vsign.packets.v1_7 .ProtocolLibvSign()), 
-	v1_6 (66, new de.unitygaming.bukkit.vsign.packets.v1_6 .ProtocolLibHandler(), new de.unitygaming.bukkit.vsign.packets.v1_6 .ProtocolLibvSign()),
-	v1_5 (55, new de.unitygaming.bukkit.vsign.packets.v1_5 .ProtocolLibHandler(), new de.unitygaming.bukkit.vsign.packets.v1_5 .ProtocolLibvSign()),
+	v1_9 (99, new de.unitygaming.bukkit.vsign.packets.v1_9.ProtocolLibHandler(), new de.unitygaming.bukkit.vsign.packets.v1_9.ProtocolLibvSign()), 
+	v1_8 (88, new de.unitygaming.bukkit.vsign.packets.v1_8.ProtocolLibHandler(), new de.unitygaming.bukkit.vsign.packets.v1_8.ProtocolLibvSign()), 
+	v1_7 (77, new de.unitygaming.bukkit.vsign.packets.v1_7.ProtocolLibHandler(), new de.unitygaming.bukkit.vsign.packets.v1_7.ProtocolLibvSign()), 
+	v1_6 (66, new de.unitygaming.bukkit.vsign.packets.v1_6.ProtocolLibHandler(), new de.unitygaming.bukkit.vsign.packets.v1_6.ProtocolLibvSign()),
+	v1_5 (55, new de.unitygaming.bukkit.vsign.packets.v1_5.ProtocolLibHandler(), new de.unitygaming.bukkit.vsign.packets.v1_5.ProtocolLibvSign()),
 	v1_4 (44, null, null),
 	v1_3 (33, null, null),
 	v1_2 (22, null, null),
