@@ -24,7 +24,7 @@ import com.comphenix.protocol.events.PacketContainer;
 
 import de.unitygaming.bukkit.vsign.util.ReturningInvoker;
 
-public abstract interface PacketHandler {
+public interface PacketHandler {
     
     public void sendPacket(Player player, PacketContainer packet);
     public void addPacketListener(Plugin plugin, Player player, PacketType type, ReturningInvoker<PacketContainer, Boolean> invoker, boolean dropPacketOnError);
