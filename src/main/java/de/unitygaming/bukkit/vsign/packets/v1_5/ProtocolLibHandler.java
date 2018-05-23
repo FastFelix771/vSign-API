@@ -17,7 +17,9 @@
 package de.unitygaming.bukkit.vsign.packets.v1_5;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.logging.Level;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
@@ -32,7 +34,9 @@ import com.comphenix.protocol.injector.GamePhase;
 import de.unitygaming.bukkit.vsign.PacketHandler;
 import de.unitygaming.bukkit.vsign.util.ReturningInvoker;
 import lombok.SneakyThrows;
+import lombok.extern.java.Log;
 
+@Log(topic = "vSign-API")
 public class ProtocolLibHandler implements PacketHandler {
 
 	@Override @SneakyThrows(InvocationTargetException.class)
@@ -47,12 +51,22 @@ public class ProtocolLibHandler implements PacketHandler {
 			@Override
 			public void onPacketReceiving(PacketEvent e) {
 				if(!(e.getPlayer().getName().equalsIgnoreCase(player.getName()))) return;
-				if(!(e.getPacketType() == type)) return;
+				if(e.getPacketType() != type) return;
+
+				final PacketEvent event = e;
+				final PacketContainer packet = e.getPacket();
 
 				try{
-					e.setCancelled(invoker.invoke(e.getPacket()));
-				} catch(Throwable t) {
-					t.printStackTrace();
+					Bukkit.getScheduler().runTask(plugin, new Runnable() {
+
+						@Override
+						public void run() {
+							event.setCancelled(invoker.invoke(packet));
+						}
+
+					});
+				} catch(Exception ex) {
+					log.log(Level.SEVERE, ex.getMessage(), ex);
 					e.setCancelled(dropPacketOnError);
 				}
 			}
@@ -67,12 +81,12 @@ public class ProtocolLibHandler implements PacketHandler {
 			@Override
 			public void onPacketReceiving(PacketEvent e) {
 				if(!(e.getPlayer().getName().equalsIgnoreCase(player.getName()))) return;
-				if(!(e.getPacketID() == legacyID)) return;
+				if(e.getPacketID() != legacyID) return;
 
 				try{
 					e.setCancelled(invoker.invoke(e.getPacket()));
-				} catch(Throwable t) {
-					t.printStackTrace();
+				} catch(Exception ex) {
+					log.log(Level.SEVERE, ex.getMessage(), ex);
 					e.setCancelled(dropPacketOnError);
 				}
 			}
